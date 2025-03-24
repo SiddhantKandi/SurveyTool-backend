@@ -6,6 +6,7 @@ import axios from 'axios'
 const getLocation = asyncHandler(async (req, res) => {
     const { latitude, longitude } = req.query;
 
+
     const response = await axios.get(
         process.env.GEOENCODING_API,
         {
@@ -17,6 +18,8 @@ const getLocation = asyncHandler(async (req, res) => {
             },
         }
     );
+
+
 
     if (!response) {
         throw new ApiError(400, {}, "Location and address could not be fetched.")
