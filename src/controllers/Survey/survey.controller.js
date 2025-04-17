@@ -12,14 +12,9 @@ const newsurvey = asyncHandler(async (req, res, next) => {
 
     const { surveyData } = req.body;
 
-
-
-
     const { surveyTitle, surveyType, surveyCategory,Surveyquestions } = surveyData;
 
     const template = Surveyquestions;
-
-
 
     //Validate the data coming from the frontend
     if (!surveyTitle || !surveyType || !surveyCategory) {
