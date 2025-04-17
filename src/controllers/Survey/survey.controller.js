@@ -14,13 +14,18 @@ const newsurvey = asyncHandler(async (req, res, next) => {
 
 
 
-    const { surveyTitle, surveyType, surveyCategory,template } = surveyData;
+
+    const { surveyTitle, surveyType, surveyCategory,Surveyquestions } = surveyData;
+
+    const template = Surveyquestions;
+
 
 
     //Validate the data coming from the frontend
     if (!surveyTitle || !surveyType || !surveyCategory) {
         throw new ApiError(400, {}, "Survey details are required");
     }
+    
 
     let isTemplatePresent = false;
 
