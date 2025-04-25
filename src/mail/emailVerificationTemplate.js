@@ -131,7 +131,6 @@ const otpTemplate = (username, otp) => {
       <body>
           <div class="container">
               <div class="header">
-                  <img src="https://peopleprudent.com/wp-content/uploads/2021/12/logo-1.png" alt="Logo">
                   <h1>Account Verification</h1>
               </div>
               <div class="content">
@@ -143,10 +142,7 @@ const otpTemplate = (username, otp) => {
                   <p>If you did not request this, you can safely ignore this email.</p>
                   <p>Thank you for using our services!</p>
               </div>
-              <div class="footer">
-                  <p>&copy; 2024 People Prudent Consulting and HR Solutions. All rights reserved.</p>
-                  <p><a href="https://peopleprudent.com/">Visit our website</a></p>
-              </div>
+d
           </div>
       </body>
       

@@ -121,7 +121,6 @@ const remainder = (username, survey_url) => {
       <body>
           <div class="container">
               <div class="header">
-                  <img src="https://peopleprudent.com/wp-content/uploads/2021/12/logo-1.png" alt="Logo">
                   <h1>Reminder: Complete Your Survey</h1>
               </div>
               <div class="content">
@@ -132,12 +131,9 @@ const remainder = (username, survey_url) => {
                       <a href="${survey_url}" class="button">Complete the Survey</a>
                   </div>
                   <p>Thank you for your time and valuable input.</p>
-                  <p>Best regards,<br><strong>People Prudent Consulting and HR Solutions</strong></p>
+                  <p>Best regards,<br><strong>Survey Sphere</strong></p>
               </div>
-              <div class="footer">
-                  <p>&copy; 2024 People Prudent Consulting and HR Solutions. All rights reserved.</p>
-                  <p><a href="https://peopleprudent.com/">Visit our website</a></p>
-              </div>
+              
           </div>
       </body>
       

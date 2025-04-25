@@ -61,9 +61,9 @@ const targetteduser = asyncHandler(async (req, res) => {
 //Sending email to respondents
 const sendemailtorespondets = asyncHandler(async (req, res) => {
   const users = req.body.users;
-  const { surveyTitle, surveyType } = req.params;
+  const { surveyTitle, surveyType,surveyCategory } = req.params;
 
-  const survey = await Survey.findOne({ surveyTitle: surveyTitle, surveyType: surveyType })
+  const survey = await Survey.findOne({ surveyTitle: surveyTitle, surveyType: surveyType, surveyCategory: surveyCategory })
 
   const surveyId = survey._id
 
@@ -143,7 +143,7 @@ const sendemailtorespondets = asyncHandler(async (req, res) => {
 
     for (const user of allUsers) {
       if (!existingLinkMap.has(user._id.toString())) {
-        const uniqueSurveyLink = `${process.env.SURVEY_BASEURL}/${surveyTitle}/${surveyType}?userId=${user._id}`;
+        const uniqueSurveyLink = `${process.env.SURVEY_BASEURL}/${surveyTitle}/${surveyType}/${surveyCategory}?userId=${user._id}`;
 
         linkCreationPromises.push(
           targetedSurveyLink.create({
@@ -204,10 +204,10 @@ const sendemailtorespondets = asyncHandler(async (req, res) => {
 
 //Sending reminder email to respondents
 const sendremindertorespondents = asyncHandler(async (req, res) => {
-  const { surveyTitle, surveyType } = req.params;
+  const { surveyTitle, surveyType,surveyCategory } = req.params;
 
   // Retrieve the survey based on the title and type
-  const survey = await Survey.findOne({ surveyTitle, surveyType });
+  const survey = await Survey.findOne({ surveyTitle, surveyType,surveyCategory });
 
 
   if (!survey) {
@@ -239,7 +239,7 @@ const sendremindertorespondents = asyncHandler(async (req, res) => {
 
   // Prepare and send reminder emails to each user
   const emailTasks = users.map(async (user) => {
-    const uniqueSurveyLink = `${process.env.SURVEY_BASEURL}/${surveyTitle}/${surveyType}?userId=${user._id}`;
+    const uniqueSurveyLink = `${process.env.SURVEY_BASEURL}/${surveyTitle}/${surveyType}/${surveyCategory}?userId=${user._id}`;
     try {
       await sendemailremainder(user.email, user.username, uniqueSurveyLink);
     } catch (error) {

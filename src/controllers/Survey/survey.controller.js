@@ -14,6 +14,7 @@ const newsurvey = asyncHandler(async (req, res, next) => {
 
     const { surveyTitle, surveyType, surveyCategory,Surveyquestions } = surveyData;
 
+
     const template = Surveyquestions;
 
     //Validate the data coming from the frontend
@@ -28,28 +29,56 @@ const newsurvey = asyncHandler(async (req, res, next) => {
         isTemplatePresent = true;
     }
 
-    const commonsurveyfields = await Survey.findOne({
-        surveyTitle: surveyTitle,
-        surveyType: surveyType,
-        surveyCategory: surveyCategory,
-        link: `${process.env.SURVEY_BASEURL}/${surveyTitle}/${surveyType}/${surveyCategory}`,
-        isTemplatePresent : isTemplatePresent,
-        template : template
-    })
+    let commonsurveyfields;
+
+    if(surveyType === "respondent_details"){
+        commonsurveyfields = await Survey.findOne({
+            surveyTitle: surveyTitle,
+            surveyType: surveyType,
+            surveyCategory: surveyCategory,
+            link: `${process.env.CORS_ORIGIN}/respondent/${surveyTitle}/${surveyType}/${surveyCategory}`,
+            isTemplatePresent : isTemplatePresent,
+            template : template
+        })
+    } else{
+        commonsurveyfields = await Survey.findOne({
+            surveyTitle: surveyTitle,
+            surveyType: surveyType,
+            surveyCategory: surveyCategory,
+            link: `${process.env.SURVEY_BASEURL}/${surveyTitle}/${surveyType}/${surveyCategory}`,
+            isTemplatePresent : isTemplatePresent,
+            template : template
+        }) 
+    }
+
+
 
     if (commonsurveyfields) {
         // return res.status(400).json({ message: "Survey already exists" });
         return next();
     }
+    
+    let newsurveyfields;
 
-    const newsurveyfields = await Survey({
-        surveyTitle: surveyTitle,
-        surveyType: surveyType,
-        surveyCategory: surveyCategory,
-        link: `${process.env.SURVEY_BASEURL}/${surveyTitle}/${surveyType}/${surveyCategory}`,
-        isTemplatePresent : isTemplatePresent,
-        template : template
-    })
+    if(surveyType === "respondent_details"){
+        newsurveyfields = await Survey({
+            surveyTitle: surveyTitle,
+            surveyType: surveyType,
+            surveyCategory: surveyCategory,
+            link: `${process.env.CORS_ORIGIN}/respondent/${surveyTitle}/${surveyType}/${surveyCategory}`,
+            isTemplatePresent : isTemplatePresent,
+            template : template
+        }) 
+    } else{
+        newsurveyfields = await Survey({
+            surveyTitle: surveyTitle,
+            surveyType: surveyType,
+            surveyCategory: surveyCategory,
+            link: `${process.env.SURVEY_BASEURL}/${surveyTitle}/${surveyType}/${surveyCategory}`,
+            isTemplatePresent : isTemplatePresent,
+            template : template
+        })
+    }
 
 
     try {
