@@ -44,9 +44,8 @@ AZURE_SUBSCRIPTION_KEY
 GEOENCODING_API
 ```
 
-Replace your_mongodb_connection_string and your_jwt_secret with your actual values.
+▶️ 4. Start the Development Server
 
 ```bash
-```
-▶️ 4. Start the Development Server
 npm run dev
+```
